@@ -1,4 +1,3 @@
-# -*- coding: utf-8 -*-
 from unittest.mock import MagicMock, patch
 
 from chaosaws.awslambda.probes import (get_function_concurrency,

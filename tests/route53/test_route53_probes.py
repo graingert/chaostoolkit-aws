@@ -1,4 +1,3 @@
-# -*- coding: utf-8 -*-
 import json
 import os
 from unittest.mock import MagicMock, patch
@@ -14,7 +13,7 @@ module_path = os.path.dirname(os.path.abspath(__file__))
 
 
 def read_in_data(filename):
-    with open(os.path.join(module_path, 'data', filename), 'r') as fh:
+    with open(os.path.join(module_path, 'data', filename)) as fh:
         data = json.loads(fh.read())
     return data
 
