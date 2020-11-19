@@ -251,7 +251,7 @@ def set_service_deployment_configuration(
     if not validate_cluster(cluster, client):
         raise FailedActivity('unable to locate cluster: %s' % cluster)
     if not validate_service(cluster, service, client):
-        raise FailedActivity('unable to locate service: %s on %s' % (
+        raise FailedActivity('unable to locate service: {} on {}'.format(
             service, cluster))
 
     params = {
@@ -422,7 +422,7 @@ def validate(client: boto3.client,
             cluster=cluster, services=[service])['services']
         if not response:
             raise FailedActivity(
-                'unable to locate service: %s on cluster: %s' % (
+                'unable to locate service: {} on cluster: {}'.format(
                     service, cluster))
 
 

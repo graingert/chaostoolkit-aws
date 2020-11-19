@@ -81,7 +81,7 @@ def stop_db_instance(db_instance_identifier: str,
     try:
         return client.stop_db_instance(**params)
     except ClientError as e:
-        raise FailedActivity('Failed to stop RDS DB instance %s: %s' % (
+        raise FailedActivity('Failed to stop RDS DB instance {}: {}'.format(
             db_instance_identifier, e.response['Error']['Message']))
 
 
@@ -99,7 +99,7 @@ def stop_db_cluster(db_cluster_identifier: str,
         return client.stop_db_cluster(
             DBClusterIdentifier=db_cluster_identifier)
     except ClientError as e:
-        raise FailedActivity('Failed to stop RDS DB Cluster %s: %s' % (
+        raise FailedActivity('Failed to stop RDS DB Cluster {}: {}'.format(
             db_cluster_identifier, e.response['Error']['Message']))
 
 
@@ -135,7 +135,7 @@ def delete_db_instance(db_instance_identifier: str,
     try:
         return client.delete_db_instance(**params)
     except ClientError as e:
-        raise FailedActivity('Failed to delete RDS DB instance %s: %s' % (
+        raise FailedActivity('Failed to delete RDS DB instance {}: {}'.format(
             db_instance_identifier, e.response['Error']['Message']))
 
 
@@ -167,7 +167,7 @@ def delete_db_cluster(db_cluster_identifier: str,
     try:
         return client.delete_db_cluster(**params)
     except ClientError as e:
-        raise FailedActivity('Failed to delete RDS DB cluster %s: %s' % (
+        raise FailedActivity('Failed to delete RDS DB cluster {}: {}'.format(
             db_cluster_identifier, e.response['Error']['Message']))
 
 
@@ -187,7 +187,7 @@ def delete_db_cluster_endpoint(db_cluster_identifier: str,
         return client.delete_db_cluster_endpoint(
             DBClusterEndpointIdentifier=cluster['Endpoint'])
     except ClientError as e:
-        raise FailedActivity('unable to delete endpoint for cluster %s: %s' % (
+        raise FailedActivity('unable to delete endpoint for cluster {}: {}'.format(
             db_cluster_identifier, e.response['Error']['Message']))
 
 
@@ -199,5 +199,5 @@ def describe_db_cluster(cluster_id: str, client: boto3.client) -> AWSResponse:
         return client.describe_db_clusters(
             DBClusterIdentifier=cluster_id)['DBClusters'][0]
     except ClientError as e:
-        raise FailedActivity('unable to identify cluster %s: %s' % (
+        raise FailedActivity('unable to identify cluster {}: {}'.format(
             cluster_id, e.response['Error']['Message']))

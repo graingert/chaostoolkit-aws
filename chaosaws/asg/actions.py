@@ -598,13 +598,13 @@ def detach_instance_volume(client: boto3.client,
             Tags=[
                 {
                     'Key': 'ChaosToolkitDetached',
-                    'Value': 'DeviceName=%s;InstanceId=%s;ASG=%s' % (
+                    'Value': 'DeviceName={};InstanceId={};ASG={}'.format(
                         volume_data['DeviceName'], volume_data['InstanceId'],
                         asg_name)
                 }])
         return response
     except ClientError as e:
-        raise FailedActivity('unable to detach volume %s from %s: %s' % (
+        raise FailedActivity('unable to detach volume {} from {}: {}'.format(
             volume_data['VolumeId'], volume_data['InstanceId'],
             e.response['Error']['Message']))
 
@@ -633,10 +633,10 @@ def attach_instance_volume(client: boto3.client,
             Device=mount_point,
             InstanceId=instance_id,
             VolumeId=volume_id)
-        logger.debug('Attached volume %s to instance %s' % (
+        logger.debug('Attached volume {} to instance {}'.format(
             volume_id, instance_id))
     except ClientError as e:
         raise FailedActivity(
-            'Unable to attach volume %s to instance %s: %s' % (
+            'Unable to attach volume {} to instance {}: {}'.format(
                 volume_id, instance_id, e.response['Error']['Message']))
     return response
